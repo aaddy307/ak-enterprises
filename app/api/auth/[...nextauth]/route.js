@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import dbConnect from '@/lib/db/connect';
-import Admin from '@/lib/db/models/Admin';
 
 const handler = NextAuth({
   providers: [
@@ -16,24 +14,25 @@ const handler = NextAuth({
           throw new Error('Email and password required');
         }
 
-        await dbConnect();
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
+        const adminName = process.env.ADMIN_NAME || 'Admin';
 
-        const admin = await Admin.findOne({ email: credentials.email });
-
-        if (!admin) {
-          throw new Error('Invalid credentials');
+        if (!adminEmail || !adminPassword) {
+          throw new Error('Admin credentials not configured');
         }
 
-        const isValid = await admin.comparePassword(credentials.password);
+        const emailMatch = credentials.email.toLowerCase() === adminEmail.toLowerCase();
+        const passwordMatch = credentials.password === adminPassword;
 
-        if (!isValid) {
+        if (!emailMatch || !passwordMatch) {
           throw new Error('Invalid credentials');
         }
 
         return {
-          id: admin._id.toString(),
-          email: admin.email,
-          name: admin.name,
+          id: 'admin',
+          email: adminEmail,
+          name: adminName,
         };
       },
     }),
@@ -50,12 +49,14 @@ const handler = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id;
+        session.user.name = token.name;
       }
       return session;
     },
