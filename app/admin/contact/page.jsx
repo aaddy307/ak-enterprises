@@ -105,25 +105,25 @@ export default function AdminContactPage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
+    <div className="max-w-2xl mx-auto">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Contact Information</h2>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 space-y-4 sm:space-y-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Phone Numbers</label>
-          <div className="flex gap-2 mb-2">
+          <div className="flex flex-col sm:flex-row gap-2 mb-2">
             <input
               type="text"
               value={phoneInput}
               onChange={(e) => setPhoneInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addPhone())}
-              className="flex-1 min-w-0 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm sm:text-base"
               placeholder="+91 98765 43210"
             />
             <button
               type="button"
               onClick={addPhone}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base"
             >
               Add
             </button>
@@ -138,7 +138,7 @@ export default function AdminContactPage() {
                 <button
                   type="button"
                   onClick={() => removePhone(index)}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 text-lg leading-none"
                 >
                   ×
                 </button>
@@ -149,19 +149,19 @@ export default function AdminContactPage() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Email Addresses</label>
-          <div className="flex gap-2 mb-2">
+          <div className="flex flex-col sm:flex-row gap-2 mb-2">
             <input
               type="email"
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addEmail())}
-              className="flex-1 min-w-0 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm sm:text-base"
               placeholder="info@example.com"
             />
             <button
               type="button"
               onClick={addEmail}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base"
             >
               Add
             </button>
@@ -176,7 +176,7 @@ export default function AdminContactPage() {
                 <button
                   type="button"
                   onClick={() => removeEmail(index)}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 text-lg leading-none"
                 >
                   ×
                 </button>
@@ -191,7 +191,7 @@ export default function AdminContactPage() {
             rows={3}
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm sm:text-base"
             placeholder="Full address"
           />
         </div>
@@ -202,7 +202,7 @@ export default function AdminContactPage() {
             type="text"
             value={formData.workingHours}
             onChange={(e) => setFormData({ ...formData, workingHours: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm sm:text-base"
             placeholder="Mon-Sat: 9:00 AM - 6:00 PM"
           />
         </div>
@@ -213,7 +213,7 @@ export default function AdminContactPage() {
             type="url"
             value={formData.mapUrl}
             onChange={(e) => setFormData({ ...formData, mapUrl: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm sm:text-base"
             placeholder="https://maps.google.com/..."
           />
         </div>
@@ -222,7 +222,7 @@ export default function AdminContactPage() {
           <button
             type="submit"
             disabled={saving}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors"
+            className="px-4 sm:px-6 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors text-sm sm:text-base"
           >
             {saving ? "Saving..." : "Save Changes"}
           </button>

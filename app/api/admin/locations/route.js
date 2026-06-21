@@ -19,7 +19,7 @@ export async function GET(request) {
 
     await dbConnect();
 
-    const locations = await Location.find().sort({ name: 1 });
+    const locations = await Location.find().sort({ createdAt: -1 });
 
     return NextResponse.json({ data: locations });
   } catch (error) {
@@ -39,7 +39,7 @@ export async function POST(request) {
 
     const body = await request.json();
 
-    if (!body.slug) {
+    if (!body.slug && body.name) {
       body.slug = generateSlug(body.name);
     }
 

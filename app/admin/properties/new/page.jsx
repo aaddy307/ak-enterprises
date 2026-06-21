@@ -147,7 +147,7 @@ export default function NewPropertyPage() {
               required
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
               placeholder="Property title"
             />
           </div>
@@ -159,7 +159,7 @@ export default function NewPropertyPage() {
               rows={4}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
               placeholder="Property description"
             />
           </div>
@@ -171,7 +171,7 @@ export default function NewPropertyPage() {
               required
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
               placeholder="1000000"
             />
           </div>
@@ -181,7 +181,7 @@ export default function NewPropertyPage() {
             {locations.length === 0 ? (
               <div className="w-full px-4 py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-400">
                 No locations yet —{" "}
-                <a href="/admin/locations" className="text-primary underline">
+                <a href="/admin/locations" className="text-gray-600 underline">
                   add locations first
                 </a>
               </div>
@@ -190,7 +190,7 @@ export default function NewPropertyPage() {
                 required
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none bg-white"
               >
                 <option value="">Select a location</option>
                 {locations.map((loc) => (
@@ -208,7 +208,7 @@ export default function NewPropertyPage() {
               required
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
             >
               {categories.map((cat) => (
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
@@ -221,7 +221,7 @@ export default function NewPropertyPage() {
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -234,7 +234,7 @@ export default function NewPropertyPage() {
               type="text"
               value={formData.area}
               onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
               placeholder="e.g., 1500 sq.ft"
             />
           </div>
@@ -244,7 +244,7 @@ export default function NewPropertyPage() {
             <select
               value={formData.bedrooms}
               onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none bg-white"
             >
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <option key={num} value={num}>{num === 0 ? "0 (Studio / Commercial)" : `${num} BHK`}</option>
@@ -257,7 +257,7 @@ export default function NewPropertyPage() {
             <select
               value={formData.bathrooms}
               onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none bg-white"
             >
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <option key={num} value={num}>{num}</option>
@@ -270,7 +270,7 @@ export default function NewPropertyPage() {
             <select
               value={formData.parking}
               onChange={(e) => setFormData({ ...formData, parking: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none bg-white"
             >
               {[0, 1, 2, 3, 4, 5].map((num) => (
                 <option key={num} value={num}>{num}</option>
@@ -298,7 +298,7 @@ export default function NewPropertyPage() {
                         return { ...prev, features: newFeatures };
                       });
                     }}
-                    className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary cursor-pointer"
+                    className="w-4 h-4 text-gray-600 border-gray-300 rounded focus:ring-gray-500 cursor-pointer"
                   />
                   <span>{amenity}</span>
                 </label>

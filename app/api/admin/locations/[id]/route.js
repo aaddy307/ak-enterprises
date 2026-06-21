@@ -13,6 +13,7 @@ export async function GET(request, { params }) {
     await dbConnect();
 
     const location = await Location.findById(params.id);
+
     if (!location) {
       return NextResponse.json({ error: 'Location not found' }, { status: 404 });
     }
@@ -35,10 +36,15 @@ export async function PUT(request, { params }) {
 
     const body = await request.json();
 
-    const location = await Location.findByIdAndUpdate(params.id, body, {
-      new: true,
-      runValidators: true,
-    });
+    if (body.name && !body.slug) {
+      body.slug = body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    const location = await Location.findByIdAndUpdate(
+      params.id,
+      body,
+      { new: true, runValidators: true }
+    );
 
     if (!location) {
       return NextResponse.json({ error: 'Location not found' }, { status: 404 });
@@ -61,11 +67,12 @@ export async function DELETE(request, { params }) {
     await dbConnect();
 
     const location = await Location.findByIdAndDelete(params.id);
+
     if (!location) {
       return NextResponse.json({ error: 'Location not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ data: { deleted: true } });
+    return NextResponse.json({ message: 'Location deleted successfully' });
   } catch (error) {
     console.error('DELETE /api/admin/locations/[id] error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

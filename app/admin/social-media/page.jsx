@@ -224,7 +224,7 @@ export default function AdminSocialMediaPage() {
                   required
                   value={formData.platform}
                   onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
                 >
                   <option value="">Select platform</option>
                   <option value="Facebook">Facebook</option>
@@ -244,7 +244,7 @@ export default function AdminSocialMediaPage() {
                   required
                   value={formData.url}
                   onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
                   placeholder={formData.platform === "WhatsApp" ? "e.g., 919876543210" : "https://..."}
                 />
               </div>
@@ -254,7 +254,7 @@ export default function AdminSocialMediaPage() {
                   id="isActive"
                   checked={formData.isActive}
                   onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                  className="w-4 h-4 text-gray-600 border-gray-300 rounded focus:ring-gray-500"
                 />
                 <label htmlFor="isActive" className="text-sm text-gray-700">Active</label>
               </div>

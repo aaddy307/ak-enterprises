@@ -109,7 +109,7 @@ export default function AdminLayout({ children }) {
                   className={cn(
                     "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all",
                     isActive
-                      ? "bg-primary text-white"
+                      ? "bg-gray-700 text-white"
                       : "text-gray-400 hover:bg-gray-800 hover:text-white"
                   )}
                 >
@@ -122,7 +122,7 @@ export default function AdminLayout({ children }) {
 
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800 bg-gray-900">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+              <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white">
                 <span className="font-semibold">{session?.user?.name?.[0] || "A"}</span>
               </div>
               {(sidebarOpen || isMobile) && (
@@ -146,23 +146,23 @@ export default function AdminLayout({ children }) {
             isMobile ? "ml-0" : (sidebarOpen ? "ml-64" : "ml-20")
           )}
         >
-          <header className="bg-white shadow-sm h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-            <div className="flex items-center gap-4">
+          <header className="bg-white shadow-sm h-14 sm:h-16 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
+            <div className="flex items-center gap-3 sm:gap-4">
               {isMobile && (
                 <button
                   onClick={() => setSidebarOpen(true)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600"
                 >
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </button>
               )}
-              <h1 className="text-xl font-semibold text-gray-800">
+              <h1 className="text-base sm:text-xl font-semibold text-gray-800 truncate">
                 {sidebarLinks.find((l) => pathname === l.href || pathname.startsWith(l.href + "/"))?.name || "Admin"}
               </h1>
             </div>
-            <Link href="/" className="text-sm text-gray-500 hover:text-gray-700">
+            <Link href="/" className="text-xs sm:text-sm text-gray-500 hover:text-gray-700 whitespace-nowrap">
               View Site
             </Link>
           </header>
