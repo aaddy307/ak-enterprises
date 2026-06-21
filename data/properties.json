@@ -1,0 +1,265 @@
+{
+  "properties": [
+    {
+      "id": "golden-heights",
+      "name": "The Golden Heights",
+      "tag": "Premium",
+      "tagType": "primary",
+      "price": 12000000,
+      "priceDisplay": "₹1.2 Cr",
+      "location": {
+        "area": "Ambernath East",
+        "state": "MH",
+        "full": "Ambernath East, MH"
+      },
+      "type": "residential",
+      "subtype": "apartment",
+      "configuration": "3 BHK",
+      "area": 1450,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBWSwGNtOYvoOYAIot9rVIsPqX3tUlSjkymHtuIpafhKQxuig3UMYIYxmTSw963vLlVudywtnMGtDibHXuK7cYRq0T3C47joUK2qmSNZzve_xRo1ehDSXqEA-0Lf5Wtv7HBcCu9fjMCb2ZxeSBvMz9rKmjjWwkEJnVhADmet1X_O1MUBVX35nMBu2YRWR8aR1radQq1xqV8wX44klSeJTFaDhfUCutHQ_Qrr57fa10IxuFpaF-SZesawbP8ZW_NIWlYZIx3-hpfvzuR"
+      ],
+      "description": "Experience unparalleled luxury with this stunning 3 BHK penthouse featuring expansive glass walls, premium marble flooring, and breathtaking views of the Ambernath skyline. Every detail has been crafted to perfection.",
+      "features": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "balconies": 2,
+        "parking": 2
+      },
+      "status": "available",
+      "featured": true,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    },
+    {
+      "id": "emerald-greens",
+      "name": "Emerald Greens",
+      "tag": "New Launch",
+      "tagType": "secondary",
+      "price": 8500000,
+      "priceDisplay": "₹85 L",
+      "location": {
+        "area": "Ambernath West",
+        "state": "MH",
+        "full": "Ambernath West, MH"
+      },
+      "type": "residential",
+      "subtype": "apartment",
+      "configuration": "2 BHK",
+      "area": 1100,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCdvvEQm8BeoS8pE84ZR2I1FS9ALcnb0LP0xtR1a1KAjokuIiiIETAZu_aUrCdIDsvHTXaU7OOgl96jdN6lB-HuiVH2VOuuv8xEs0jd6F5JG10htyHkmFn0jAXZ43kbA7F9TbgdfU-Bvqc5ZGOsXed9CBOsTR5xkxqyiwQAKczFHOt-fH3EJh6BzGgQsW_vmEEmGloUeQo8-jbZWHyPrB5NHcse0OpOY8z0xkrQSWXXw5lTRp7o-BKQcd3i5V0VVG_4OoSvlhHH2IP2"
+      ],
+      "description": "A perfect blend of modern architecture and natural surroundings. Emerald Greens offers spacious 2 BHK apartments with lush green views and premium amenities.",
+      "features": {
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "balconies": 1,
+        "parking": 1
+      },
+      "status": "new-launch",
+      "featured": true,
+      "reraRegistered": true,
+      "possession": "Dec 2026"
+    },
+    {
+      "id": "apex-plaza",
+      "name": "Apex Plaza",
+      "tag": "Commercial",
+      "tagType": "tertiary",
+      "price": 25000000,
+      "priceDisplay": "₹2.5 Cr",
+      "location": {
+        "area": "Shiv Mandir Road",
+        "state": "MH",
+        "full": "Shiv Mandir Road, MH"
+      },
+      "type": "commercial",
+      "subtype": "retail",
+      "configuration": "Retail Space",
+      "area": 3200,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBySZgijgqsHPEwL1f4Yjcv2UlwMWVXi0P4Q6QbbLA4Ux_OxxrTqfb3KgBCIka6DBmDLnA82Y_Gj-FKDVUzndGb_PyI961eZeSlrGl4Rhsdq9MUOJF5rP6pkR8NSfHB-j5p7XS1hKYMjY4Lwl3xpwUmG8NPH1XOJfHwQSTfGJ_en2wgx9xnZrrFSilHSLl_F77hw-ZSYwLIEXnmfTNztY66Zjvecu0EpJxmOpeshhNr0oNWThJ-CXQlym9hV0Hl-eC4u1qhBloK_ZMn"
+      ],
+      "description": "Premium commercial retail space with massive glass storefronts and modern minimalist interior. Perfect for high-end brands seeking visibility and sophistication.",
+      "features": {
+        "floors": 2,
+        "bathrooms": 4,
+        "parking": 10
+      },
+      "status": "available",
+      "featured": true,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    },
+    {
+      "id": "obsidian-suites",
+      "name": "The Obsidian Suites",
+      "tag": "Featured",
+      "tagType": "primary",
+      "price": 7550000,
+      "priceDisplay": "₹75.5 L+",
+      "location": {
+        "area": "Ambernath East",
+        "state": "MH",
+        "full": "Ambernath East"
+      },
+      "type": "residential",
+      "subtype": "apartment",
+      "configuration": "2 & 3 BHK",
+      "area": 1150,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuDsEyH3Bobw7F5449alDzJlmmBOm5SghvzJ-O-tlRvfznMe4zSpZW4eWoF1JHaxLxx5zlFm_mqk48Wrz9T7fydLBZob4FWb7vJatqUPZ1t23VfYefjWHhzT0pDSDLGMNwJtHnCfYwodMyzHHbLyw19PIXZaeH2cFW_wPpEFuGa5j_zplB-uQCqoXJylcYQs3B8PxzNg5T-RwzZTOeY1yEChxkjKW0wmbKqWBh_kzdHORwZDEnmtBtVGzIcAcB5zqP7lSP_nd1d9IPY4"
+      ],
+      "description": "Sleek, modern luxury apartment complex featuring large glass balconies and gold metal accents. Ultra-high-end minimalist design with twilight views.",
+      "features": {
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "balconies": 1,
+        "parking": 1
+      },
+      "status": "available",
+      "featured": false,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    },
+    {
+      "id": "royal-residences",
+      "name": "Royal Residences",
+      "tag": "Premium",
+      "tagType": "primary",
+      "price": 9500000,
+      "priceDisplay": "₹95 L",
+      "location": {
+        "area": "Ambernath East",
+        "state": "MH",
+        "full": "Ambernath East, MH"
+      },
+      "type": "residential",
+      "subtype": "apartment",
+      "configuration": "3 BHK",
+      "area": 1350,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBlCigYq6x0oOSHY4OjwMZ1wFwwBUir9-NcBOU2x62O1X9aCe4Ftn5Wi7Ys6gzYgxKnR-jWE9cgCrNe3dct7dYCO_tSL9_yKdiEurHtIvt22_FIFomyIm3B07841jTLPz4Nu8NLbr7WdTDbAir_Sf1kK8eF9lJLnX9BYJ_WxO7suJuFHjD3idxbCqRtUqjVWt9sz1mYDfTFjrLUXL-rtg3NF_9LRzWgIn0fujDWrlDRKFg8tN4SZOV_Rcd1M4FN23T001x_SoVWbjRN"
+      ],
+      "description": "Luxurious 3 BHK apartments with high-end minimalist furniture, dark marble floors, and floor-to-ceiling windows showcasing the city skyline.",
+      "features": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "balconies": 2,
+        "parking": 2
+      },
+      "status": "available",
+      "featured": true,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    },
+    {
+      "id": "skyline-towers",
+      "name": "Skyline Towers",
+      "tag": "New Launch",
+      "tagType": "secondary",
+      "price": 6500000,
+      "priceDisplay": "₹65 L",
+      "location": {
+        "area": "Morivali",
+        "state": "MH",
+        "full": "Morivali, MH"
+      },
+      "type": "residential",
+      "subtype": "apartment",
+      "configuration": "2 BHK",
+      "area": 1050,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCDeJm3nuWdOfLGd4a3s0GZF4CDqTJvH_wihf1Vu_gQuonYxNeWfgzAf41WSN-XErXQmvYxjsD-0sRKUdCnheqzt1F8ump-q2DhsBdipJL45tA4Qz3rhw5NQBaM9Pprfc25hsRmqlnsHymqvv1COeMBW_PdOMbt9yJ47JO69TIt0_rocgSKcH07KX8ZgerMKPT5x3Noqfy6ivS2_jTxEMP4nPGHx37FZ9k2hJjOUhPelLtF2NS1e_PVcCzLCjD3EoQMKABH5Em1m9I6"
+      ],
+      "description": "Modern residential tower with panoramic city views. Premium finishes, intelligent space design, and world-class amenities for contemporary living.",
+      "features": {
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "balconies": 1,
+        "parking": 1
+      },
+      "status": "new-launch",
+      "featured": false,
+      "reraRegistered": false,
+      "possession": "Jun 2027"
+    },
+    {
+      "id": "crystal-heights",
+      "name": "Crystal Heights",
+      "tag": "Commercial",
+      "tagType": "tertiary",
+      "price": 18000000,
+      "priceDisplay": "₹1.8 Cr",
+      "location": {
+        "area": "Shivaji Nagar",
+        "state": "MH",
+        "full": "Shivaji Nagar, MH"
+      },
+      "type": "commercial",
+      "subtype": "office",
+      "configuration": "Office Space",
+      "area": 2500,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAe1d7GaB8kJaCtDFOiiEgTWnftU3Q76Fpktwp4iC7r5Urm_GTuBajueEczlnzCmxtsKt7ffYNeMKHh99D6AETyFhagjQj4ttXReA37XrdVN3DS2j-nhtNon8mZWWv1dkUjGsM0T6nHmNtmn38Z4Uyny4LeTbM3EbaWQ6GT5QPP_22uipwRhXRvl9jZOcwwvAlOZtnovs87mnX6mfqzdMJVnhUHVRbLmkd-uQ7m-2nPZwCHpKqEHrBeIM9CRE3OQ39zuy8BgUZGUIn8"
+      ],
+      "description": "State-of-the-art commercial office space with premium infrastructure. Perfect for corporates seeking a prestigious address in Ambernath.",
+      "features": {
+        "floors": 1,
+        "bathrooms": 2,
+        "parking": 8
+      },
+      "status": "available",
+      "featured": false,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    },
+    {
+      "id": "aurora-villas",
+      "name": "Aurora Villas",
+      "tag": "Premium",
+      "tagType": "primary",
+      "price": 35000000,
+      "priceDisplay": "₹3.5 Cr",
+      "location": {
+        "area": "Ambernath West",
+        "state": "MH",
+        "full": "Ambernath West, MH"
+      },
+      "type": "residential",
+      "subtype": "villa",
+      "configuration": "4 BHK",
+      "area": 2800,
+      "areaUnit": "sq.ft",
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBlCigYq6x0oOSHY4OjwMZ1wFwwBUir9-NcBOU2x62O1X9aCe4Ftn5Wi7Ys6gzYgxKnR-jWE9cgCrNe3dct7dYCO_tSL9_yKdiEurHtIvt22_FIFomyIm3B07841jTLPz4Nu8NLbr7WdTDbAir_Sf1kK8eF9lJLnX9BYJ_WxO7suJuFHjD3idxbCqRtUqjVWt9sz1mYDfTFjrLUXL-rtg3NF_9LRzWgIn0fujDWrlDRKFg8tN4SZOV_Rcd1M4FN23T001x_SoVWbjRN"
+      ],
+      "description": "Exquisite independent villas with private gardens, swimming pool, and smart home features. The pinnacle of luxury living in Ambernath.",
+      "features": {
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "balconies": 3,
+        "parking": 3
+      },
+      "status": "available",
+      "featured": true,
+      "reraRegistered": true,
+      "possession": "Ready to Move"
+    }
+  ],
+  "filters": {
+    "locations": ["Ambernath East", "Ambernath West", "Shiv Mandir Road", "Shivaji Nagar", "Morivali"],
+    "types": ["residential", "commercial"],
+    "subtypes": ["apartment", "villa", "retail", "office"],
+    "configurations": ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "Retail Space", "Office Space"],
+    "statuses": ["available", "new-launch", "sold-out"]
+  }
+}
