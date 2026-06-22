@@ -9,6 +9,8 @@
     "lint": "eslint",
     "seed": "node scripts/seed-admin.js",
     "seed-admin": "node scripts/seed-admin.js",
+    "seed-demo": "node scripts/seed-demo.js",
+    "seed-all": "node scripts/seed-demo.js",
     "migrate-data": "node scripts/migrate-data.js"
   },
   "dependencies": {
