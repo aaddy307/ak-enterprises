@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -17,13 +17,13 @@ export async function GET(request, { params }) {
     const property = await Property.findById(id).populate('category', 'name slug').lean();
 
     if (!property) {
-      return NextResponse.json({ error: 'Property not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Property not found' }, { status: 404 });
     }
 
     return NextResponse.json({ data: property });
   } catch (error) {
     console.error('GET /api/admin/properties/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -32,7 +32,7 @@ export async function PUT(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -46,13 +46,13 @@ export async function PUT(request, { params }) {
     ).populate('category', 'name slug');
 
     if (!property) {
-      return NextResponse.json({ error: 'Property not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Property not found' }, { status: 404 });
     }
 
     return NextResponse.json({ data: property });
   } catch (error) {
     console.error('PUT /api/admin/properties/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -61,7 +61,7 @@ export async function DELETE(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -69,12 +69,12 @@ export async function DELETE(request, { params }) {
     const property = await Property.findByIdAndDelete(id);
 
     if (!property) {
-      return NextResponse.json({ error: 'Property not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Property not found' }, { status: 404 });
     }
 
     return NextResponse.json({ message: 'Property deleted successfully' });
   } catch (error) {
     console.error('DELETE /api/admin/properties/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }

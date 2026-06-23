@@ -94,11 +94,6 @@ export default function AboutPage() {
                 and premium service to every transaction.
               </p>
             </div>
-            <div>
-              <Button variant="ghost" icon="arrow_right_alt" iconPosition="right">
-                Learn more about our heritage
-              </Button>
-            </div>
           </div>
         </div>
       </section>

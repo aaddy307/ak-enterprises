@@ -6,6 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 export function PropertyInquiryForm({ propertyName }) {
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
     message: "",
   });
@@ -67,6 +68,14 @@ export function PropertyInquiryForm({ propertyName }) {
         placeholder="Full Name"
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        className="w-full bg-[#121414] border border-outline/20 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-primary transition-all text-sm"
+      />
+      <input
+        type="tel"
+        required
+        placeholder="Phone Number"
+        value={formData.phone}
+        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
         className="w-full bg-[#121414] border border-outline/20 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-primary transition-all text-sm"
       />
       <input

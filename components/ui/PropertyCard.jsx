@@ -33,7 +33,7 @@ export function PropertyCard({ property, className, index = 0 }) {
     property.status === "new-launch"
   ) {
     displayStatus = "Pre-Launch";
-  } else if (property.possession === "Ready to Move") {
+  } else if (property.possession?.toLowerCase() === "ready to move") {
     displayStatus = "New";
   } else {
     displayStatus = "Pre-Launch";
@@ -53,7 +53,8 @@ export function PropertyCard({ property, className, index = 0 }) {
   const areaDisplay = isCommercial ? `${formattedArea}+` : formattedArea;
 
   // Custom Badges matching the photo
-  const showBadge = property.tag?.toLowerCase() !== "premium" && property.tag?.toLowerCase() !== "luxury";
+  const tagVal = property.tag;
+  const showBadge = tagVal && tagVal.toLowerCase() !== "premium" && tagVal.toLowerCase() !== "luxury";
 
   return (
     <motion.article
@@ -76,13 +77,19 @@ export function PropertyCard({ property, className, index = 0 }) {
             whileHover={{ scale: 1.04 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <Image
-              src={property.images[0]}
-              alt={property.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+            {property.images?.[0] ? (
+              <Image
+                src={property.images[0]}
+                alt={property.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            ) : (
+              <div className="w-full h-full bg-[#222] flex items-center justify-center">
+                <Icon name="image" size={48} className="text-on-surface-variant/40" />
+              </div>
+            )}
           </motion.div>
         </Link>
 
@@ -97,7 +104,7 @@ export function PropertyCard({ property, className, index = 0 }) {
                   : "bg-primary text-on-primary"
               )}
             >
-              {property.tag}
+              {tagVal}
             </span>
           </div>
         )}
@@ -119,7 +126,7 @@ export function PropertyCard({ property, className, index = 0 }) {
         {/* Location Row */}
         <p className="flex items-center gap-2 text-on-surface-variant text-sm mb-5">
           <Icon name="location_on" size={16} className="text-primary" />
-          <span>{property.location.area}</span>
+          <span>{property.location?.area || property.location || "Ambernath"}</span>
         </p>
 
         {/* 3-Column Specifications Grid */}

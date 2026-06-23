@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { contactInfo } from "@/lib/utils";
 import dbConnect from "@/lib/db/connect";
 import SocialMedia from "@/lib/db/models/SocialMedia";
+import Contact from "@/lib/db/models/Contact";
 
 export const metadata = {
   title: "Contact Us",
@@ -14,11 +15,13 @@ export const metadata = {
 
 export default async function ContactPage() {
   let socialLinks = [];
+  let dbContactInfo = null;
   try {
     await dbConnect();
     socialLinks = await SocialMedia.find({ isActive: true }).sort({ platform: 1 }).lean();
+    dbContactInfo = await Contact.findOne().sort({ createdAt: -1 }).lean();
   } catch (error) {
-    console.error("Failed to fetch social media links for contact page:", error);
+    console.error("Failed to fetch data for contact page:", error);
   }
 
   // Fallback links if none exist in the database yet
@@ -29,6 +32,17 @@ export default async function ContactPage() {
       { platform: "WhatsApp", url: "https://wa.me/919876543210" },
     ];
   }
+
+  const dbPhones = Array.isArray(dbContactInfo?.phone) ? dbContactInfo.phone : [];
+  const dbEmails = Array.isArray(dbContactInfo?.email) ? dbContactInfo.email : [];
+
+  const displayContact = {
+    address: dbContactInfo?.address || contactInfo.address,
+    phones: dbPhones.length > 0 ? dbPhones : [contactInfo.phone],
+    emails: dbEmails.length > 0 ? dbEmails : [contactInfo.email],
+    hours: dbContactInfo?.workingHours || contactInfo.hours,
+  };
+
   return (
     <>
       <section className="relative h-[409px] flex items-center justify-center overflow-hidden">
@@ -93,35 +107,41 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <p className="text-on-surface font-semibold mb-1">Address</p>
-                    <p className="text-on-surface-variant">{contactInfo.address}</p>
+                    <p className="text-on-surface-variant">{displayContact.address}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
                     <Icon name="phone" size={24} className="text-primary" />
                   </div>
-                  <div>
+                  <div className="flex flex-col">
                     <p className="text-on-surface font-semibold mb-1">Phone</p>
-                    <a
-                      href={`tel:${contactInfo.phone}`}
-                      className="text-primary hover:underline"
-                    >
-                      {contactInfo.phone}
-                    </a>
+                    {displayContact.phones.map((phone, idx) => (
+                      <a
+                        key={idx}
+                        href={`tel:${phone}`}
+                        className="text-primary hover:underline"
+                      >
+                        {phone}
+                      </a>
+                    ))}
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
                     <Icon name="mail" size={24} className="text-primary" />
                   </div>
-                  <div>
+                  <div className="flex flex-col">
                     <p className="text-on-surface font-semibold mb-1">Email</p>
-                    <a
-                      href={`mailto:${contactInfo.email}`}
-                      className="text-primary hover:underline"
-                    >
-                      {contactInfo.email}
-                    </a>
+                    {displayContact.emails.map((email, idx) => (
+                      <a
+                        key={idx}
+                        href={`mailto:${email}`}
+                        className="text-primary hover:underline"
+                      >
+                        {email}
+                      </a>
+                    ))}
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
@@ -132,7 +152,7 @@ export default async function ContactPage() {
                     <p className="text-on-surface font-semibold mb-1">
                       Office Hours
                     </p>
-                    <p className="text-on-surface-variant">{contactInfo.hours}</p>
+                    <p className="text-on-surface-variant">{displayContact.hours}</p>
                   </div>
                 </li>
               </ul>

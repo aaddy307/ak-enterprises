@@ -8,7 +8,7 @@ export async function GET(request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -55,7 +55,7 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error('GET /api/admin/properties error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -63,7 +63,7 @@ export async function POST(request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -75,6 +75,6 @@ export async function POST(request) {
     return NextResponse.json({ data: property }, { status: 201 });
   } catch (error) {
     console.error('POST /api/admin/properties error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }

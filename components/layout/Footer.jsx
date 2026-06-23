@@ -3,14 +3,17 @@ import { Icon } from "@/components/ui/Icon";
 import { navigation, contactInfo } from "@/lib/utils";
 import dbConnect from "@/lib/db/connect";
 import SocialMedia from "@/lib/db/models/SocialMedia";
+import Contact from "@/lib/db/models/Contact";
 
 export async function Footer() {
   let socialLinks = [];
+  let dbContactInfo = null;
   try {
     await dbConnect();
     socialLinks = await SocialMedia.find({ isActive: true }).sort({ platform: 1 }).lean();
+    dbContactInfo = await Contact.findOne().sort({ createdAt: -1 }).lean();
   } catch (error) {
-    console.error("Failed to fetch social media links for footer:", error);
+    console.error("Failed to fetch data for footer:", error);
   }
 
   // Fallback links if none exist in the database yet
@@ -21,6 +24,17 @@ export async function Footer() {
       { platform: "WhatsApp", url: "https://wa.me/919876543210" },
     ];
   }
+
+  const dbPhones = Array.isArray(dbContactInfo?.phone) ? dbContactInfo.phone : [];
+  const dbEmails = Array.isArray(dbContactInfo?.email) ? dbContactInfo.email : [];
+
+  const displayContact = {
+    address: dbContactInfo?.address || contactInfo.address,
+    phones: dbPhones.length > 0 ? dbPhones : [contactInfo.phone],
+    emails: dbEmails.length > 0 ? dbEmails : [contactInfo.email],
+    hours: dbContactInfo?.workingHours || contactInfo.hours,
+  };
+
   return (
     <footer className="bg-surface-container-lowest border-t border-outline/10">
       <div className="max-w-[1440px] mx-auto px-6 py-16">
@@ -124,31 +138,35 @@ export async function Footer() {
                   className="text-primary mt-0.5"
                 />
                 <span className="text-on-surface-variant text-sm">
-                  {contactInfo.address}
+                  {displayContact.address}
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Icon name="phone" size={20} className="text-primary" />
-                <a
-                  href={`tel:${contactInfo.phone}`}
-                  className="text-on-surface-variant hover:text-primary transition-colors text-sm"
-                >
-                  {contactInfo.phone}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Icon name="mail" size={20} className="text-primary" />
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="text-on-surface-variant hover:text-primary transition-colors text-sm"
-                >
-                  {contactInfo.email}
-                </a>
-              </li>
+              {displayContact.phones.map((phone, idx) => (
+                <li key={idx} className="flex items-center gap-3">
+                  <Icon name="phone" size={20} className="text-primary" />
+                  <a
+                    href={`tel:${phone}`}
+                    className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+                  >
+                    {phone}
+                  </a>
+                </li>
+              ))}
+              {displayContact.emails.map((email, idx) => (
+                <li key={idx} className="flex items-center gap-3">
+                  <Icon name="mail" size={20} className="text-primary" />
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+                  >
+                    {email}
+                  </a>
+                </li>
+              ))}
               <li className="flex items-center gap-3">
                 <Icon name="schedule" size={20} className="text-primary" />
                 <span className="text-on-surface-variant text-sm">
-                  {contactInfo.hours}
+                  {displayContact.hours}
                 </span>
               </li>
             </ul>

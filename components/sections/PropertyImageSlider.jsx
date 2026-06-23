@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 export function PropertyImageSlider({ images = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const safeIndex = images.length > 0 ? Math.min(activeIndex, images.length - 1) : 0;
+
   if (!images || images.length === 0) {
     return (
       <div className="relative h-[480px] w-full rounded-2xl bg-surface-container flex items-center justify-center border border-outline/10 text-on-surface-variant">
@@ -25,7 +27,7 @@ export function PropertyImageSlider({ images = [] }) {
       {/* Big Main Image */}
       <div className="relative h-[480px] w-full rounded-2xl overflow-hidden border border-outline/10 bg-surface-container">
         <Image
-          src={images[activeIndex]}
+          src={images[safeIndex]}
           alt="Property Main Image"
           fill
           className="object-cover transition-transform duration-700 hover:scale-102"
@@ -43,7 +45,7 @@ export function PropertyImageSlider({ images = [] }) {
             onClick={() => setActiveIndex(idx)}
             className={cn(
               "relative h-20 md:h-24 w-full rounded-lg overflow-hidden border-2 transition-all cursor-pointer",
-              activeIndex === idx
+              safeIndex === idx
                 ? "border-primary"
                 : "border-transparent hover:border-primary/50"
             )}
@@ -61,10 +63,10 @@ export function PropertyImageSlider({ images = [] }) {
         {/* "+More" Thumbnail if images exceed 4 */}
         {showMoreThumbnail && (
           <button
-            onClick={() => setActiveIndex(4)}
+            onClick={() => setActiveIndex(safeIndex === images.length - 1 ? 4 : safeIndex + 1)}
             className={cn(
               "relative h-20 md:h-24 w-full rounded-lg overflow-hidden border-2 transition-all cursor-pointer",
-              activeIndex >= 4
+              safeIndex >= 4
                 ? "border-primary"
                 : "border-transparent hover:border-primary/50"
             )}

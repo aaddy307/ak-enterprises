@@ -2,7 +2,9 @@
 
 import {
   ChevronRight,
+  ChevronLeft,
   ChevronDown,
+  Image as LucidImage,
   MapPin,
   Phone,
   Mail,
@@ -61,6 +63,8 @@ import { cn } from "@/lib/utils";
 
 const iconMap = {
   chevron_right: ChevronRight,
+  chevron_left: ChevronLeft,
+  arrow_left: ChevronLeft,
   chevron_down: ChevronDown,
   expand_more: ChevronDown,
   location_on: MapPin,
@@ -121,6 +125,7 @@ const iconMap = {
   search_off: SearchX,
   home: Home,
   check: Check,
+  image: LucidImage,
   visibility: Eye,
   visibility_off: EyeOff,
   add: Plus,

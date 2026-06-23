@@ -57,7 +57,7 @@ export function Categories() {
             }}
           >
             <Link
-              href={`/properties?type=${cat.slug}`}
+              href={`/properties?category=${cat.slug}`}
               className="flex flex-col items-center justify-center gap-3 p-6 sm:p-8 rounded-2xl border border-outline/10 bg-surface-container-low hover:border-primary/40 hover:bg-surface-container-high transition-all duration-300 group text-center h-full"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

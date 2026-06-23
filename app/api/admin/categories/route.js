@@ -3,19 +3,13 @@ import { authOptions } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/connect';
 import Category from '@/lib/db/models/Category';
-
-function generateSlug(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
+import { generateSlug } from '@/lib/slug';
 
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -25,7 +19,7 @@ export async function GET() {
     return NextResponse.json({ data: categories });
   } catch (error) {
     console.error('GET /api/admin/categories error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -33,7 +27,7 @@ export async function POST(request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -49,6 +43,6 @@ export async function POST(request) {
     return NextResponse.json({ data: category }, { status: 201 });
   } catch (error) {
     console.error('POST /api/admin/categories error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }

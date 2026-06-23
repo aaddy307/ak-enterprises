@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -17,13 +17,13 @@ export async function GET(request, { params }) {
     const enquiry = await Enquiry.findById(id).populate('propertyId', 'title');
 
     if (!enquiry) {
-      return NextResponse.json({ error: 'Enquiry not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Enquiry not found' }, { status: 404 });
     }
 
     return NextResponse.json({ data: enquiry });
   } catch (error) {
     console.error('GET /api/admin/enquiries/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -32,7 +32,7 @@ export async function PUT(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -46,13 +46,13 @@ export async function PUT(request, { params }) {
     );
 
     if (!enquiry) {
-      return NextResponse.json({ error: 'Enquiry not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Enquiry not found' }, { status: 404 });
     }
 
     return NextResponse.json({ data: enquiry });
   } catch (error) {
     console.error('PUT /api/admin/enquiries/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -61,7 +61,7 @@ export async function DELETE(request, { params }) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
@@ -69,12 +69,12 @@ export async function DELETE(request, { params }) {
     const enquiry = await Enquiry.findByIdAndDelete(id);
 
     if (!enquiry) {
-      return NextResponse.json({ error: 'Enquiry not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Enquiry not found' }, { status: 404 });
     }
 
     return NextResponse.json({ message: 'Enquiry deleted successfully' });
   } catch (error) {
     console.error('DELETE /api/admin/enquiries/[id] error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }

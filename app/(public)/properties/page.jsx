@@ -75,7 +75,7 @@ function PropertiesContent() {
   );
 
   const handleSortChange = (e) => {
-    router.push(`/properties?${createQueryString("sort", e.target.value)}`);
+    router.replace(`/properties?${createQueryString("sort", e.target.value)}`);
   };
 
   const PAGE_SIZE = 6;

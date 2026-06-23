@@ -16,11 +16,16 @@ export async function POST(request) {
       );
     }
 
+    const interestMsg = interest ? `Interested in: ${interest}` : "";
+    const propertyMsg = property ? `Property: ${property}` : "";
+    const parts = [interestMsg, propertyMsg, message ? message.trim() : ""].filter(Boolean);
+    const finalMessage = parts.join("\n") || "General Inquiry callback request";
+
     const enquiry = await Enquiry.create({
       name,
       email,
       phone,
-      message: (message ? message.trim() : "") || (interest ? `Interested in: ${interest}` : "") || (property ? `Requested callback for property: ${property}` : "General Inquiry callback request"),
+      message: finalMessage,
       propertyId: propertyId || null,
       propertyTitle: property || "",
       status: "new",

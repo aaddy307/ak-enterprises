@@ -9,8 +9,8 @@ export async function GET(request) {
     await dbConnect();
     const { searchParams } = new URL(request.url);
 
-    // Support both `category` (slug from filter sidebar) and legacy `type` param
     const categorySlug = searchParams.get("category") || searchParams.get("type") || null;
+    const subtype = searchParams.get("subtype") || null;
     const location = searchParams.get("location") || null;
     const bhk = searchParams.get("bhk") || null;
     const minPrice = searchParams.get("minPrice")
@@ -19,7 +19,7 @@ export async function GET(request) {
     const maxPrice = searchParams.get("maxPrice")
       ? parseInt(searchParams.get("maxPrice"))
       : null;
-    // Build DB query
+
     const query = { status: "active" };
 
     if (categorySlug) {
@@ -31,17 +31,33 @@ export async function GET(request) {
       }
     }
 
-    if (location) {
-      query.location = { $regex: location, $options: "i" };
+    const bedroomConditions = [];
+
+    if (subtype) {
+      if (subtype === "villa") {
+        bedroomConditions.push({ bedrooms: { $gte: 4 } });
+      } else if (subtype === "office") {
+        bedroomConditions.push({ bedrooms: { $gt: 0 } });
+      } else if (subtype === "retail") {
+        bedroomConditions.push({ bedrooms: 0 });
+      }
     }
 
     if (bhk) {
       const bhkNum = parseInt(bhk);
       if (bhk === "4+") {
-        query.bedrooms = { $gte: 4 };
+        bedroomConditions.push({ bedrooms: { $gte: 4 } });
       } else if (!isNaN(bhkNum)) {
-        query.bedrooms = bhkNum;
+        bedroomConditions.push({ bedrooms: bhkNum });
       }
+    }
+
+    if (bedroomConditions.length > 0) {
+      query.$and = bedroomConditions;
+    }
+
+    if (location) {
+      query.location = { $regex: location, $options: "i" };
     }
 
     if (minPrice !== null && maxPrice !== null) {
@@ -68,6 +84,6 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error("GET /api/properties error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }

@@ -2,16 +2,18 @@
   "name": "ak-enterprises",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node scripts/seed-admin.js",
-    "seed-admin": "node scripts/seed-admin.js",
-    "seed-demo": "node scripts/seed-demo.js",
-    "seed-all": "node scripts/seed-demo.js",
-    "migrate-data": "node scripts/migrate-data.js"
+    "seed": "node scripts/seed-admin.mjs",
+    "seed-admin": "node scripts/seed-admin.mjs",
+    "seed-demo": "node scripts/seed-demo.mjs",
+    "seed-all": "node scripts/seed-demo.mjs",
+    "migrate-data": "node scripts/migrate-data.mjs",
+    "test-backend": "node scripts/test-backend.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

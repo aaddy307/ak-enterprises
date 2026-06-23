@@ -54,14 +54,13 @@ export function Hero() {
     e.preventDefault();
     const params = new URLSearchParams();
     if (selectedCategoryId) {
-      params.set("subtype", selectedCategoryId);
       const cat = categories.find((c) => c.value === selectedCategoryId);
       if (cat) {
-        params.set("type", cat.type);
+        params.set("category", cat.type);
       }
     } else {
       if (searchType === "buy") {
-        params.set("type", "residential");
+        params.set("category", "residential");
       }
     }
     router.push(`/properties?${params.toString()}`);

@@ -1,3 +1,5 @@
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -9,11 +11,16 @@ cloudinary.config({
 
 export async function POST(request) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get('file');
 
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ success: false, error: 'No file provided' }, { status: 400 });
     }
 
     const bytes = await file.arrayBuffer();
@@ -28,6 +35,7 @@ export async function POST(request) {
     });
 
     return NextResponse.json({
+      success: true,
       data: {
         url: result.secure_url,
         publicId: result.public_id,
@@ -35,6 +43,6 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Upload failed' }, { status: 500 });
   }
 }

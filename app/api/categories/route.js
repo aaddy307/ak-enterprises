@@ -9,6 +9,6 @@ export async function GET() {
     return NextResponse.json({ data: categories });
   } catch (error) {
     console.error('GET /api/categories error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
