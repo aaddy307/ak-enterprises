@@ -11,20 +11,21 @@ export default function AdminLocationsPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetchLocations();
-  }, []);
-
-  const fetchLocations = async () => {
-    try {
-      const res = await fetch("/api/admin/locations");
-      const data = await res.json();
-      setLocations(data.data || []);
-    } catch (error) {
-      console.error("Failed to fetch locations:", error);
-    } finally {
-      setLoading(false);
+    let mounted = true;
+    async function fetchLocations() {
+      try {
+        const res = await fetch("/api/admin/locations");
+        const data = await res.json();
+        if (mounted) setLocations(data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch locations:", error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
     }
-  };
+    fetchLocations();
+    return () => { mounted = false; };
+  }, []);
 
   const openModal = (location = null) => {
     if (location) {

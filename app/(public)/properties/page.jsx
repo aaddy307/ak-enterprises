@@ -1,6 +1,8 @@
 "use client";
 
 import { Suspense, useCallback, useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/components/ui/PropertyCard";
 import { FilterSidebar } from "@/components/sections/FilterSidebar";
@@ -13,6 +15,7 @@ function PropertiesContent() {
   const category = searchParams.get("category") || "";
   const location = searchParams.get("location") || "";
   const bhk = searchParams.get("bhk") || "";
+  const intent = searchParams.get("intent") || "buy";
   const sort = searchParams.get("sort") || "price-desc";
 
   const [properties, setProperties] = useState([]);
@@ -27,6 +30,7 @@ function PropertiesContent() {
         if (category) queryParams.set("category", category);
         if (location) queryParams.set("location", location);
         if (bhk) queryParams.set("bhk", bhk);
+        if (intent) queryParams.set("intent", intent);
 
         const res = await fetch(`/api/properties?${queryParams.toString()}`);
         const result = await res.json();
@@ -39,7 +43,7 @@ function PropertiesContent() {
       }
     }
     fetchProperties();
-  }, [category, location, bhk]);
+  }, [category, location, bhk, intent]);
 
   // Sort properties
   const sortedProperties = [...properties];
@@ -109,30 +113,39 @@ function PropertiesContent() {
 
   return (
     <>
-      <section className="relative w-full h-[409px] min-h-[300px] flex flex-col justify-center items-center overflow-hidden">
+      <section className="relative h-[409px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-linear-to-t from-surface to-transparent" />
+          <Image
+            src="/PropertiesPage.avif"
+            alt="Properties in Ambernath"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/40 to-surface" />
         </div>
-        <div className="relative z-10 text-center px-6">
-          <nav className="flex justify-center items-center gap-2 mb-4 text-xs font-semibold uppercase tracking-widest text-primary/80">
-            <a href="/" className="hover:text-primary">
+        <div className="relative z-10 max-w-7xl mx-auto text-center px-6">
+          <nav className="flex justify-center items-center gap-2 mb-6 text-xs font-semibold uppercase tracking-widest text-primary">
+            <Link href="/" className="hover:underline">
               Home
-            </a>
-            <Icon name="chevron_right" size={12} />
-            <span className="text-primary-container">Ambernath</span>
+            </Link>
+            <Icon name="chevron_right" size={12} className="text-primary" />
+            <span className="text-white/60">Properties</span>
           </nav>
           <h1
-            className="font-headline text-on-surface mb-4"
+            className="font-headline text-white mb-4"
             style={{
               fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              lineHeight: 1.2,
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              lineHeight: 1.1,
               fontWeight: 600,
+              textShadow: "2px 4px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4)"
             }}
           >
             Explore Properties in Ambernath
           </h1>
-          <p className="text-on-surface-variant text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
             Discover curated luxury living spaces where modern architecture meets
             suburban serenity.
           </p>

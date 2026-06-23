@@ -10,27 +10,29 @@ export default function AdminEnquiriesPage() {
   const [selectedEnquiry, setSelectedEnquiry] = useState(null);
 
   useEffect(() => {
-    fetchEnquiries();
-  }, [pagination.page, statusFilter]);
-
-  const fetchEnquiries = async () => {
-    try {
-      const res = await fetch(`/api/admin/enquiries?page=${pagination.page}&status=${statusFilter}`);
-      const data = await res.json();
-      setEnquiries(data.data || []);
-      if (data.meta) {
-        setPagination({
-          page: data.meta.page,
-          total_pages: data.meta.total_pages,
-          total: data.meta.total,
-        });
+    let mounted = true;
+    async function fetchEnquiries() {
+      try {
+        const res = await fetch(`/api/admin/enquiries?page=${pagination.page}&status=${statusFilter}`);
+        const data = await res.json();
+        if (!mounted) return;
+        setEnquiries(data.data || []);
+        if (data.meta) {
+          setPagination({
+            page: data.meta.page,
+            total_pages: data.meta.total_pages,
+            total: data.meta.total,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch enquiries:", error);
+      } finally {
+        if (mounted) setLoading(false);
       }
-    } catch (error) {
-      console.error("Failed to fetch enquiries:", error);
-    } finally {
-      setLoading(false);
     }
-  };
+    fetchEnquiries();
+    return () => { mounted = false; };
+  }, [pagination.page, statusFilter]);
 
   const updateStatus = async (id, status) => {
     try {

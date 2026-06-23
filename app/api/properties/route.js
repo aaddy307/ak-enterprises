@@ -19,8 +19,6 @@ export async function GET(request) {
     const maxPrice = searchParams.get("maxPrice")
       ? parseInt(searchParams.get("maxPrice"))
       : null;
-    const status = searchParams.get("status") || null;
-
     // Build DB query
     const query = { status: "active" };
 

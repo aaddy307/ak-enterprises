@@ -50,7 +50,7 @@ export function WhyChooseUs() {
             Why Choose AK Enterprises
           </h2>
           <p className="text-on-surface-variant text-lg">
-            Defining excellence in Ambernath's real estate market through
+            Defining excellence in Ambernath&apos;s real estate market through
             unwavering integrity and bespoke property solutions.
           </p>
         </motion.div>

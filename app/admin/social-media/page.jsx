@@ -21,20 +21,21 @@ export default function AdminSocialMediaPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetchSocialMedia();
-  }, []);
-
-  const fetchSocialMedia = async () => {
-    try {
-      const res = await fetch("/api/admin/social-media");
-      const data = await res.json();
-      setSocialMedia(data.data || []);
-    } catch (error) {
-      console.error("Failed to fetch social media:", error);
-    } finally {
-      setLoading(false);
+    let mounted = true;
+    async function fetchSocialMedia() {
+      try {
+        const res = await fetch("/api/admin/social-media");
+        const data = await res.json();
+        if (mounted) setSocialMedia(data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch social media:", error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
     }
-  };
+    fetchSocialMedia();
+    return () => { mounted = false; };
+  }, []);
 
   const openModal = (item = null) => {
     if (item) {

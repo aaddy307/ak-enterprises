@@ -1,4 +1,5 @@
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/connect';
 import Location from '@/lib/db/models/Location';
@@ -10,16 +11,16 @@ function generateSlug(name) {
     .replace(/(^-|-$)/g, '');
 }
 
-export async function GET(request) {
+export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
 
-    const locations = await Location.find().sort({ createdAt: -1 });
+    const locations = await Location.find().sort({ createdAt: -1 }).lean();
 
     return NextResponse.json({ data: locations });
   } catch (error) {
@@ -30,7 +31,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

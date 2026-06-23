@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
@@ -35,27 +34,36 @@ export default async function ContactPage() {
       <section className="relative h-[409px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe1d7GaB8kJaCtDFOiiEgTWnftU3Q76Fpktwp4iC7r5Urm_GTuBajueEczlnzCmxtsKt7ffYNeMKHh99D6AETyFhagjQj4ttXReA37XrdVN3DS2j-nhtNon8mZWWv1dkUjGsM0T6nHmNtmn38Z4Uyny4LeTbM3EbaWQ6GT5QPP_22uipwRhXRvl9jZOcwwvAlOZtnovs87mnX6mfqzdMJVnhUHVRbLmkd-uQ7m-2nPZwCHpKqEHrBeIM9CRE3OQ39zuy8BgUZGUIn8"
+            src="/Contact.jpg"
             alt="Luxury skyscraper at twilight"
             fill
             sizes="100vw"
-            className="object-cover opacity-40"
+            className="object-cover"
+            priority
           />
-          <div className="absolute inset-0 bg-linear-to-t from-surface via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/40 to-surface" />
         </div>
-        <div className="relative z-10 text-center px-6">
+        <div className="relative z-10 max-w-7xl mx-auto text-center px-6">
+          <nav className="flex justify-center items-center gap-2 mb-6 text-xs font-semibold uppercase tracking-widest text-primary">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+            <Icon name="chevron_right" size={12} className="text-primary" />
+            <span className="text-white/60">Contact Us</span>
+          </nav>
           <h1
-            className="font-headline text-primary mb-4"
+            className="font-headline text-white mb-4"
             style={{
               fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              lineHeight: 1.2,
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              lineHeight: 1.1,
               fontWeight: 600,
+              textShadow: "2px 4px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4)"
             }}
           >
             Get In Touch
           </h1>
-          <p className="text-on-surface-variant text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
             Experience the pinnacle of luxury real estate service. Our experts
             are ready to guide you to your next masterpiece.
           </p>

@@ -11,20 +11,21 @@ export default function AdminCategoriesPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = async () => {
-    try {
-      const res = await fetch("/api/admin/categories");
-      const data = await res.json();
-      setCategories(data.data || []);
-    } catch (error) {
-      console.error("Failed to fetch categories:", error);
-    } finally {
-      setLoading(false);
+    let mounted = true;
+    async function fetchCategories() {
+      try {
+        const res = await fetch("/api/admin/categories");
+        const data = await res.json();
+        if (mounted) setCategories(data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
     }
-  };
+    fetchCategories();
+    return () => { mounted = false; };
+  }, []);
 
   const openModal = (category = null) => {
     if (category) {

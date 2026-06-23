@@ -129,7 +129,7 @@ export default async function PropertyDetailPage({ params }) {
 
   return (
     <>
-      <main className="max-w-[1440px] mx-auto px-6 py-12">
+      <main className="max-w-[1440px] mx-auto px-6 pt-28 pb-12">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 mb-6 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
           <Link href="/" className="hover:text-primary transition-colors">
@@ -249,7 +249,7 @@ export default async function PropertyDetailPage({ params }) {
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden shrink-0 border border-outline/20 bg-surface-container">
                   <Image
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=256&h=256"
+                    src="/Contact.jpg"
                     alt="Ayub Khan"
                     width={56}
                     height={56}

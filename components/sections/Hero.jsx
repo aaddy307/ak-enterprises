@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
-import { getAllProperties } from "@/lib/properties";
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -71,14 +71,14 @@ export function Hero() {
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlCigYq6x0oOSHY4OjwMZ1wFwwBUir9-NcBOU2x62O1X9aCe4Ftn5Wi7Ys6gzYgxKnR-jWE9cgCrNe3dct7dYCO_tSL9_yKdiEurHtIvt22_FIFomyIm3B07841jTLPz4Nu8NLbr7WdTDbAir_Sf1kK8eF9lJLnX9BYJ_WxO7suJuFHjD3idxbCqRtUqjVWt9sz1mYDfTFjrLUXL-rtg3NF_9LRzWgIn0fujDWrlDRKFg8tN4SZOV_Rcd1M4FN23T001x_SoVWbjRN"
+          src="/HeroBanner.jpg"
           alt="Luxury villa at dusk in Ambernath"
           fill
           sizes="100vw"
           className="object-cover scale-105"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/40 to-surface/60" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/55 to-surface" />
       </div>
 
       <motion.div
@@ -96,6 +96,7 @@ export function Hero() {
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
             fontWeight: 700,
+            textShadow: "2px 4px 16px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5)"
           }}
         >
           Find Your Dream Property in Ambernath

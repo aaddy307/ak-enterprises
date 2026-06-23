@@ -1,11 +1,12 @@
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/connect';
 import Enquiry from '@/lib/db/models/Enquiry';
 
 export async function GET(request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -27,7 +28,8 @@ export async function GET(request) {
         .populate('propertyId', 'title')
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(limit),
+        .limit(limit)
+        .lean(),
       Enquiry.countDocuments(query),
     ]);
 

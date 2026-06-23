@@ -31,6 +31,7 @@ export default function NewPropertyPage() {
     location: "",
     category: "",
     status: "active",
+    isFeatured: false,
     features: [],
     images: [],
     area: "",
@@ -107,6 +108,7 @@ export default function NewPropertyPage() {
         bedrooms: Number(formData.bedrooms),
         bathrooms: Number(formData.bathrooms),
         parking: Number(formData.parking),
+        isFeatured: Boolean(formData.isFeatured),
       };
 
       const res = await fetch("/api/admin/properties", {
@@ -226,6 +228,19 @@ export default function NewPropertyPage() {
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
+          </div>
+
+          <div>
+            <label className="flex items-center gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={formData.isFeatured}
+                onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                className="w-5 h-5 text-gray-600 border-gray-300 rounded focus:ring-gray-500 cursor-pointer"
+              />
+              <span className="text-sm font-medium text-gray-700">Mark as Featured</span>
+            </label>
+            <p className="text-xs text-gray-400 mt-1 ml-8">Featured properties appear in the &quot;Featured Residences&quot; section on the home page.</p>
           </div>
 
           <div>

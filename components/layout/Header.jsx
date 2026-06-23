@@ -28,16 +28,18 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "bg-surface/80 backdrop-blur-xl border-b border-primary/20 py-3"
-          : "bg-transparent py-4"
+          ? "bg-black/50 backdrop-blur-md border-b border-outline/10 py-3 shadow-lg"
+          : "bg-transparent py-5"
       )}
     >
       <div className="max-w-[1440px] mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Icon name="domain" size={28} className="text-primary-container" />
-          <span className="font-headline text-headline-lg text-primary-container font-semibold">
+        <Link href="/" className="flex items-center">
+          <span
+            className="font-headline text-xl md:text-2xl font-bold tracking-[0.18em] uppercase text-primary transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
             AK Enterprises
           </span>
         </Link>

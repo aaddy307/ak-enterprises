@@ -1,15 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { PropertyCard } from "@/components/ui/PropertyCard";
-import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
 
 export function PropertyGrid({ properties, title, subtitle, showViewAll = true }) {
   return (
-    <section className="py-24 px-6 max-w-[1440px] mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+    <section className="py-16 md:py-24 px-4 sm:px-6 max-w-[1440px] mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-6">
         <div>
           {subtitle && (
             <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em] block mb-4">

@@ -26,14 +26,16 @@ export async function Footer() {
       <div className="max-w-[1440px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <Icon name="domain" size={28} className="text-primary-container" />
-              <span className="font-headline text-headline-lg text-primary-container font-semibold">
+            <div className="flex items-center mb-6">
+              <span
+                className="font-headline text-xl md:text-2xl font-bold tracking-[0.18em] uppercase text-primary"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
                 AK Enterprises
               </span>
             </div>
             <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-              Defining excellence in Ambernath's real estate market through
+              Defining excellence in Ambernath&apos;s real estate market through
               unwavering integrity and bespoke property solutions.
             </p>
             <div className="flex items-center gap-4">

@@ -38,7 +38,7 @@ export default function AdminPropertiesPage() {
     }
 
     fetchData();
-  }, [pagination.page, filters]);
+  }, [pagination.page, filters.status, filters.category, filters.search]);
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
@@ -109,6 +109,7 @@ export default function AdminPropertiesPage() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Featured</th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -148,6 +149,15 @@ export default function AdminPropertiesPage() {
                         >
                           {property.status}
                         </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        {property.isFeatured ? (
+                          <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700">
+                            Featured
+                          </span>
+                        ) : (
+                          <span className="text-sm text-gray-400">—</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">

@@ -1,18 +1,20 @@
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/connect';
 import Location from '@/lib/db/models/Location';
 
 export async function GET(request, { params }) {
   try {
-    const session = await getServerSession();
+    const { id } = await params;
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
 
-    const location = await Location.findById(params.id);
+    const location = await Location.findById(id).lean();
 
     if (!location) {
       return NextResponse.json({ error: 'Location not found' }, { status: 404 });
@@ -27,7 +29,8 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const session = await getServerSession();
+    const { id } = await params;
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -41,9 +44,9 @@ export async function PUT(request, { params }) {
     }
 
     const location = await Location.findByIdAndUpdate(
-      params.id,
+      id,
       body,
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!location) {
@@ -59,14 +62,15 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const session = await getServerSession();
+    const { id } = await params;
+    const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await dbConnect();
 
-    const location = await Location.findByIdAndDelete(params.id);
+    const location = await Location.findByIdAndDelete(id);
 
     if (!location) {
       return NextResponse.json({ error: 'Location not found' }, { status: 404 });

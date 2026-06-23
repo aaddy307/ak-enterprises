@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
@@ -14,28 +13,40 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-24 pb-16 px-6 border-b border-outline/30 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <nav className="flex items-center gap-2 mb-6 text-xs font-semibold uppercase tracking-widest text-primary">
+      <section className="relative h-[409px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/About.jpg"
+            alt="About AK Enterprises"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/40 to-surface" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto text-center px-6">
+          <nav className="flex justify-center items-center gap-2 mb-6 text-xs font-semibold uppercase tracking-widest text-primary">
             <Link href="/" className="hover:underline">
               Home
             </Link>
-            <Icon name="chevron_right" size={14} />
-            <span className="text-on-surface-variant">About Us</span>
+            <Icon name="chevron_right" size={12} className="text-primary" />
+            <span className="text-white/60">About Us</span>
           </nav>
           <h1
-            className="font-headline text-on-surface mb-4"
+            className="font-headline text-white mb-4"
             style={{
               fontFamily: "var(--font-playfair)",
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               lineHeight: 1.1,
               fontWeight: 600,
+              textShadow: "2px 4px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4)"
             }}
           >
             About AK Enterprises
           </h1>
-          <p className="text-on-surface-variant text-lg max-w-2xl">
-            Crafting a legacy of luxury and trust in Ambernath's premium real
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
+            Crafting a legacy of luxury and trust in Ambernath&apos;s premium real
             estate landscape for over a decade.
           </p>
         </div>
@@ -43,9 +54,9 @@ export default function AboutPage() {
 
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden group">
+          <div className="relative aspect-4/3 rounded-xl overflow-hidden group">
             <Image
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAqoZmCGAmF9Ur_wVelsjl47wa4KidZbF9JjyzxAYWC41B-eCPWDKXv7Gnf_wptE1teIl6_okW1JYiRvqjdZdl3LYL2zZyAWpf2mXNzYWpDtGNVkYpCklJx7T45qmrXZeSpwaKf36bXRizohIa7lZlT9LOPuBVdCXu8tpeWZDABy_FT5slNrnktyl7HEBU2sG2rgQ4bTC2cuyH_4C3SCdt0TJoGvpkz20nevz67PDW-qRL3W4byEGW0EMmj_g_3onM-1NHZsk9SSX_"
+              src="/SideImage.jpg"
               alt="AK Enterprises office building at twilight"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -71,14 +82,14 @@ export default function AboutPage() {
               </h2>
               <p className="text-on-surface-variant leading-relaxed mb-6">
                 Since our inception, AK Enterprises has been at the forefront of
-                redefining luxury living in Ambernath. We don't just sell
+                redefining luxury living in Ambernath. We don&apos;t just sell
                 properties; we curate lifestyles. Our deep-rooted local expertise
                 allows us to identify unique opportunities that others miss,
                 ensuring our clients invest in nothing but the best.
               </p>
               <p className="text-on-surface-variant leading-relaxed">
                 Our philosophy is simple: uncompromising quality and absolute
-                transparency. Whether it's a sprawling residential estate or a
+                transparency. Whether it&apos;s a sprawling residential estate or a
                 strategic commercial hub, we bring the same level of dedication
                 and premium service to every transaction.
               </p>
@@ -94,7 +105,7 @@ export default function AboutPage() {
 
       <section className="py-20 px-6 bg-surface-container-low">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="text-center p-8 border-r border-primary/10 last:border-0"
@@ -133,7 +144,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-on-surface-variant">
               Every interaction is guided by principles that have built our
-              reputation as Ambernath's most trusted property partner.
+               reputation as Ambernath&apos;s most trusted property partner.
             </p>
           </div>
 
@@ -169,7 +180,7 @@ export default function AboutPage() {
             Ready to Find Your Dream Property?
           </h2>
           <p className="text-on-surface-variant text-lg mb-10 max-w-2xl mx-auto">
-            Let our experts guide you to the perfect investment in Ambernath's
+            Let our experts guide you to the perfect investment in Ambernath&apos;s
             most prestigious addresses.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -9,9 +9,9 @@ export async function POST(request) {
     const body = await request.json();
     const { name, phone, email, interest, message, property, propertyId } = body;
 
-    if (!name || !email) {
+    if (!name || !email || !phone) {
       return NextResponse.json(
-        { success: false, error: "Name and email are required fields." },
+        { success: false, error: "Name, email, and phone are required fields." },
         { status: 400 }
       );
     }

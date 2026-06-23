@@ -24,11 +24,11 @@ import {
   Tag,
   Map,
   ArrowRight,
-  ArrowLeft,
   Car,
   Layers,
   Bath,
   Search,
+  SearchX,
   Home,
   Fence,
   Check,
@@ -54,6 +54,8 @@ import {
   TrendingUp,
   Building,
   Warehouse,
+  Tractor,
+  Factory,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -63,6 +65,7 @@ const iconMap = {
   expand_more: ChevronDown,
   location_on: MapPin,
   map_pin: MapPin,
+  "map-pin": MapPin,
   phone: Phone,
   mail: Mail,
   email: Mail,
@@ -86,6 +89,7 @@ const iconMap = {
   domain: Building2,
   building: Building2,
   building_2: Building2,
+  building2: Building2,
   menu: Menu,
   close: X,
   x: X,
@@ -114,6 +118,7 @@ const iconMap = {
   bath: Bath,
   droplet: Bath,
   search: Search,
+  search_off: SearchX,
   home: Home,
   check: Check,
   visibility: Eye,
@@ -143,6 +148,8 @@ const iconMap = {
   trending: TrendingUp,
   building_1: Building,
   warehouse: Warehouse,
+  tractor: Tractor,
+  factory: Factory,
 };
 
 const socialIcons = {
