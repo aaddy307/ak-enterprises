@@ -314,24 +314,7 @@ export default async function PropertyDetailPage({ params }) {
               <PropertyInquiryForm propertyName={property.name} />
             </div>
 
-            {/* Listing Insights Card */}
-            <div className="bg-[#181a1b] border border-outline/10 p-6 rounded-2xl shadow-2xl space-y-4">
-              <h4 className="text-[11px] font-bold tracking-widest text-on-surface-variant uppercase border-b border-outline/5 pb-2">
-                Listing Insights
-              </h4>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-on-surface-variant">Days on Market</span>
-                <span className="text-white font-semibold">12 Days</span>
-              </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-on-surface-variant">Views this week</span>
-                <span className="text-white font-semibold">1,420</span>
-              </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-on-surface-variant">Neighborhood Rating</span>
-                <span className="text-primary font-bold">9.8/10</span>
-              </div>
-            </div>
+
           </div>
         </div>
 
