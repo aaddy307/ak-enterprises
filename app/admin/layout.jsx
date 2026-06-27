@@ -111,6 +111,11 @@ export default function AdminLayout({ children }) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => {
+                    if (isMobile) {
+                      setSidebarOpen(false);
+                    }
+                  }}
                   className={cn(
                     "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all",
                     isActive
@@ -125,7 +130,10 @@ export default function AdminLayout({ children }) {
             })}
             {isMobile && (
               <button
-                onClick={() => signOut({ callbackUrl: "/admin/login" })}
+                onClick={() => {
+                  setSidebarOpen(false);
+                  signOut({ callbackUrl: "/admin/login" });
+                }}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-400 hover:bg-gray-800 hover:text-white w-full text-left cursor-pointer"
               >
                 <span className="text-xl">
