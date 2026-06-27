@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
-
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,38 +30,26 @@ const itemVariants = {
   },
 };
 
-const categories = [
-  { value: "apartment", label: "Flats / Apartments", type: "residential" },
-  { value: "villa", label: "Villas / Houses", type: "residential" },
-  { value: "retail", label: "Shops / Retail Spaces", type: "commercial" },
-  { value: "office", label: "Offices / Commercial Suites", type: "commercial" },
-];
-
 export function Hero() {
+  const [categories, setCategories] = useState([]);
   const [searchType, setSearchType] = useState("buy");
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const router = useRouter();
 
-  const filteredCategories = categories.filter((cat) => {
-    if (searchType === "rent") {
-      return cat.value === "apartment" || cat.value === "retail";
-    }
-    return true;
-  });
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data.data || []))
+      .catch((err) => console.error("Failed to fetch categories:", err));
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
     if (selectedCategoryId) {
-      const cat = categories.find((c) => c.value === selectedCategoryId);
-      if (cat) {
-        params.set("category", cat.type);
-      }
-    } else {
-      if (searchType === "buy") {
-        params.set("category", "residential");
-      }
+      params.set("category", selectedCategoryId);
     }
+    params.set("intent", searchType);
     router.push(`/properties?${params.toString()}`);
   };
 
@@ -143,9 +130,9 @@ export function Hero() {
                 <option value="" className="bg-surface-container text-on-surface">
                   Select a Category...
                 </option>
-                {filteredCategories.map((cat) => (
-                  <option key={cat.value} value={cat.value} className="bg-surface-container text-on-surface">
-                    {cat.label}
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat.slug} className="bg-surface-container text-on-surface">
+                    {cat.name}
                   </option>
                 ))}
               </select>

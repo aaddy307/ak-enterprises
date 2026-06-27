@@ -17,9 +17,19 @@ export async function GET(request) {
     const page = parseInt(searchParams.get('page')) || 1;
     const limit = parseInt(searchParams.get('limit')) || 10;
     const status = searchParams.get('status');
+    const search = searchParams.get('search');
 
     const query = {};
     if (status) query.status = status;
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { phone: { $regex: search, $options: 'i' } },
+        { message: { $regex: search, $options: 'i' } },
+        { propertyTitle: { $regex: search, $options: 'i' } },
+      ];
+    }
 
     const skip = (page - 1) * limit;
 

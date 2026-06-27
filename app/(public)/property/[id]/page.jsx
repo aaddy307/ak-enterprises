@@ -9,6 +9,7 @@ import { PropertyInquiryForm } from "@/components/sections/PropertyInquiryForm";
 import { getPropertyById, getRelatedProperties } from "@/lib/properties";
 import dbConnect from "@/lib/db/connect";
 import Property from "@/lib/db/models/Property";
+import Contact from "@/lib/db/models/Contact";
 import { mapDbPropertyToPublic } from "@/lib/db/utils";
 
 const AMENITY_ICONS = {
@@ -92,6 +93,19 @@ export default async function PropertyDetailPage({ params }) {
 
   if (!property) {
     notFound();
+  }
+
+  let whatsappNumber = "919876543210";
+  let phoneNumber = "+919876543210";
+  try {
+    await dbConnect();
+    const contactInfo = await Contact.findOne().sort({ createdAt: -1 }).lean();
+    if (contactInfo && contactInfo.phone && contactInfo.phone.length > 0) {
+      phoneNumber = contactInfo.phone[0];
+      whatsappNumber = phoneNumber.replace(/\D/g, "");
+    }
+  } catch (error) {
+    console.error("Error loading contact for property detail:", error);
   }
 
   let relatedProperties = [];
@@ -272,14 +286,14 @@ export default async function PropertyDetailPage({ params }) {
               {/* Call and WhatsApp CTA buttons */}
               <div className="space-y-3">
                 <a
-                  href="tel:+919876543210"
+                  href={`tel:${phoneNumber}`}
                   className="w-full bg-primary hover:brightness-110 text-on-primary font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-primary/10"
                 >
                   <Icon name="phone" size={14} />
                   Call Now
                 </a>
                 <a
-                  href={`https://wa.me/919876543210?text=Hi%20Aryan,%20I%20am%20interested%20in%20${encodeURIComponent(
+                  href={`https://wa.me/${whatsappNumber}?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(
                     property.name
                   )}`}
                   target="_blank"

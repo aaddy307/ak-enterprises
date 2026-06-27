@@ -20,21 +20,20 @@ export default function AdminSocialMediaPage() {
   const [formData, setFormData] = useState({ platform: "", url: "", isActive: true });
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    let mounted = true;
-    async function fetchSocialMedia() {
-      try {
-        const res = await fetch("/api/admin/social-media");
-        const data = await res.json();
-        if (mounted) setSocialMedia(data.data || []);
-      } catch (error) {
-        console.error("Failed to fetch social media:", error);
-      } finally {
-        if (mounted) setLoading(false);
-      }
+  const fetchSocialMedia = async () => {
+    try {
+      const res = await fetch("/api/admin/social-media");
+      const data = await res.json();
+      setSocialMedia(data.data || []);
+    } catch (error) {
+      console.error("Failed to fetch social media:", error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
     fetchSocialMedia();
-    return () => { mounted = false; };
   }, []);
 
   const openModal = (item = null) => {

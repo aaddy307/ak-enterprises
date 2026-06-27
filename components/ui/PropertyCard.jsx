@@ -1,13 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import { cn } from "@/lib/utils";
 
-export function PropertyCard({ property, className, index = 0 }) {
+// Cache the contact fetch promise so multiple cards on the same page reuse it
+let contactPromise = null;
+function getContactInfo() {
+  if (!contactPromise) {
+    contactPromise = fetch("/api/contact")
+      .then((res) => res.json())
+      .then((data) => data.data || {})
+      .catch(() => ({}));
+  }
+  return contactPromise;
+}
 
+export function PropertyCard({ property, className, index = 0 }) {
+  const [whatsappNumber, setWhatsappNumber] = useState("919876543210");
+
+  useEffect(() => {
+    getContactInfo().then((contact) => {
+      if (contact && contact.phone && contact.phone.length > 0) {
+        const clean = contact.phone[0].replace(/\D/g, "");
+        if (clean) setWhatsappNumber(clean);
+      }
+    });
+  }, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
@@ -162,7 +184,7 @@ export function PropertyCard({ property, className, index = 0 }) {
             VIEW DETAILS
           </Link>
           <a
-            href={`https://wa.me/919876543210?text=Hi, I am interested in ${encodeURIComponent(
+            href={`https://wa.me/${whatsappNumber}?text=Hi, I am interested in ${encodeURIComponent(
               property.name
             )}`}
             target="_blank"

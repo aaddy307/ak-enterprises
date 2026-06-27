@@ -42,6 +42,12 @@ export async function POST(request) {
 
     return NextResponse.json({ data: category }, { status: 201 });
   } catch (error) {
+    if (error.code === 11000) {
+      return NextResponse.json(
+        { success: false, error: 'A category with this name already exists' },
+        { status: 400 }
+      );
+    }
     console.error('POST /api/admin/categories error:', error);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }

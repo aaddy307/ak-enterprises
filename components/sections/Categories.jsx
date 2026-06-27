@@ -43,10 +43,11 @@ export function Categories() {
         Browse by Category
       </motion.h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-5">
         {categories.map((cat, index) => (
           <motion.div
             key={cat._id}
+            className="w-[calc(50%-6px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] min-w-[140px] max-w-[240px]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -61,7 +62,7 @@ export function Categories() {
               className="flex flex-col items-center justify-center gap-3 p-6 sm:p-8 rounded-2xl border border-outline/10 bg-surface-container-low hover:border-primary/40 hover:bg-surface-container-high transition-all duration-300 group text-center h-full"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Icon name={CATEGORY_ICONS[cat.slug] || "home"} size={24} className="text-primary" />
+                <Icon name={cat.icon || CATEGORY_ICONS[cat.slug] || "home"} size={24} className="text-primary" />
               </div>
               <h3
                 className="font-headline text-on-surface font-semibold"

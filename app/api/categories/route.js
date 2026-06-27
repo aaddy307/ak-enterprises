@@ -5,7 +5,7 @@ import Category from '@/lib/db/models/Category';
 export async function GET() {
   try {
     await dbConnect();
-    const categories = await Category.find().sort({ name: 1 }).select('name slug').lean();
+    const categories = await Category.find().sort({ name: 1 }).select('name slug icon').lean();
     return NextResponse.json({ data: categories });
   } catch (error) {
     console.error('GET /api/categories error:', error);

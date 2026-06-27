@@ -56,6 +56,12 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json({ data: category });
   } catch (error) {
+    if (error.code === 11000) {
+      return NextResponse.json(
+        { success: false, error: 'A category with this name already exists' },
+        { status: 400 }
+      );
+    }
     console.error('PUT /api/admin/categories/[id] error:', error);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }

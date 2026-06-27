@@ -70,6 +70,7 @@ const iconMap = {
   location_on: MapPin,
   map_pin: MapPin,
   "map-pin": MapPin,
+  mappin: MapPin,
   phone: Phone,
   mail: Mail,
   email: Mail,
@@ -215,7 +216,7 @@ export function Icon({
     );
   }
 
-  const IconComponent = iconMap[name] || ChevronRight;
+  const IconComponent = iconMap[name] || iconMap[normKey] || ChevronRight;
 
   return (
     <IconComponent

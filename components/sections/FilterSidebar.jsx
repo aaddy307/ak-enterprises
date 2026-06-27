@@ -51,11 +51,11 @@ export function FilterSidebar() {
   const currentIntent = searchParams.get("intent") || "buy";
 
   const handleFilterChange = (name, value) => {
-    router.push(`/properties?${createQueryString(name, value)}`);
+    router.push(`/properties?${createQueryString(name, value)}`, { scroll: false });
   };
 
   const handleReset = () => {
-    router.push("/properties");
+    router.push("/properties", { scroll: false });
   };
 
   return (
@@ -129,7 +129,7 @@ export function FilterSidebar() {
                 // Clear old type/subtype params if present
                 params.delete("type");
                 params.delete("subtype");
-                router.push(`/properties?${params.toString()}`);
+                router.push(`/properties?${params.toString()}`, { scroll: false });
               }}
               className="w-full bg-[#121414] border border-outline-variant text-on-surface rounded-lg py-3 px-4 appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer text-sm"
             >
@@ -187,7 +187,7 @@ export function FilterSidebar() {
         </div>
 
         {/* Configuration Section */}
-        <div className="mb-8 border-b border-outline/5 pb-6">
+        <div>
           <label className="block text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-4">
             Configuration
           </label>
@@ -209,20 +209,6 @@ export function FilterSidebar() {
             ))}
           </div>
         </div>
-
-        {/* Apply Filters Button */}
-        <Button
-          onClick={() => {
-            const element = document.getElementById("properties-list");
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          variant="primary"
-          className="w-full bg-primary text-on-primary hover:brightness-110 font-bold tracking-wider py-3.5 rounded-lg transition-all"
-        >
-          APPLY FILTERS
-        </Button>
       </div>
     </motion.aside>
   );

@@ -51,10 +51,15 @@ export default function AdminPropertiesPage() {
     }
   };
 
+  const handleFilterChange = (field, value) => {
+    setFilters((prev) => ({ ...prev, [field]: value }));
+    setPagination((prev) => ({ ...prev, page: 1 }));
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Properties</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Properties ({pagination.total})</h2>
         <Link
           href="/admin/properties/new"
           className="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors"
@@ -70,12 +75,12 @@ export default function AdminPropertiesPage() {
             placeholder="Search properties..."
             className="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
             value={filters.search}
-            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+            onChange={(e) => handleFilterChange("search", e.target.value)}
           />
           <select
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
             value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+            onChange={(e) => handleFilterChange("status", e.target.value)}
           >
             <option value="">All Status</option>
             <option value="active">Active</option>
@@ -84,7 +89,7 @@ export default function AdminPropertiesPage() {
           <select
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none"
             value={filters.category}
-            onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+            onChange={(e) => handleFilterChange("category", e.target.value)}
           >
             <option value="">All Categories</option>
             {categories.map((cat) => (

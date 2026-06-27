@@ -38,6 +38,18 @@ export default function AdminLayout({ children }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Lock body scroll on mobile when sidebar is open
+  useEffect(() => {
+    if (isMobile && sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobile, sidebarOpen]);
+
   const isLoginPage = pathname === "/admin/login";
 
   if (isLoginPage) {
@@ -63,9 +75,9 @@ export default function AdminLayout({ children }) {
               : { x: 0, width: sidebarOpen ? 256 : 80 }
           }
           transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
-          className="bg-gray-900 text-white min-h-screen fixed left-0 top-0 z-40 transition-all duration-300 shadow-xl"
+          className="bg-gray-900 text-white h-screen fixed left-0 top-0 z-40 transition-all duration-300 shadow-xl flex flex-col overflow-hidden"
         >
-          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-800">
+          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-800 shrink-0">
             {(sidebarOpen || isMobile) && (
               <Link href="/admin" className="font-bold text-lg">
                 AK Admin
@@ -90,7 +102,7 @@ export default function AdminLayout({ children }) {
             </button>
           </div>
 
-          <nav className="p-4 space-y-1">
+          <nav className="flex-1 overflow-y-auto p-4 space-y-1">
             {sidebarLinks.map((link) => {
               const isActive = link.href === "/admin"
                 ? pathname === "/admin"
@@ -113,7 +125,7 @@ export default function AdminLayout({ children }) {
             })}
           </nav>
 
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800 bg-gray-900">
+          <div className="p-4 border-t border-gray-800 bg-gray-900 shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white">
                 <span className="font-semibold">{session?.user?.name?.[0] || "A"}</span>

@@ -7,13 +7,14 @@ export default function AdminEnquiriesPage() {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({ page: 1, total_pages: 1, total: 0 });
   const [statusFilter, setStatusFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedEnquiry, setSelectedEnquiry] = useState(null);
 
   useEffect(() => {
     let mounted = true;
     async function fetchEnquiries() {
       try {
-        const res = await fetch(`/api/admin/enquiries?page=${pagination.page}&status=${statusFilter}`);
+        const res = await fetch(`/api/admin/enquiries?page=${pagination.page}&status=${statusFilter}&search=${searchQuery}`);
         const data = await res.json();
         if (!mounted) return;
         setEnquiries(data.data || []);
@@ -32,7 +33,7 @@ export default function AdminEnquiriesPage() {
     }
     fetchEnquiries();
     return () => { mounted = false; };
-  }, [pagination.page, statusFilter]);
+  }, [pagination.page, statusFilter, searchQuery]);
 
   const updateStatus = async (id, status) => {
     try {
@@ -82,17 +83,32 @@ export default function AdminEnquiriesPage() {
   return (
     <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Enquiries</h2>
-        <select
-          value={statusFilter}
-          onChange={(e) => { setStatusFilter(e.target.value); setPagination({ ...pagination, page: 1 }); }}
-          className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm"
-        >
-          <option value="">All</option>
-          <option value="new">New</option>
-          <option value="replied">Replied</option>
-          <option value="closed">Closed</option>
-        </select>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Enquiries ({pagination.total})</h2>
+        <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Search enquiries..."
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm text-gray-900 w-full sm:w-64"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setPagination((prev) => ({ ...prev, page: 1 }));
+            }}
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => {
+              setStatusFilter(e.target.value);
+              setPagination((prev) => ({ ...prev, page: 1 }));
+            }}
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none text-sm text-gray-900 bg-white"
+          >
+            <option value="">All Status</option>
+            <option value="new">New</option>
+            <option value="replied">Replied</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">

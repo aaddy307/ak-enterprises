@@ -42,6 +42,12 @@ export async function POST(request) {
 
     return NextResponse.json({ data: location }, { status: 201 });
   } catch (error) {
+    if (error.code === 11000) {
+      return NextResponse.json(
+        { success: false, error: 'A location with this name already exists' },
+        { status: 400 }
+      );
+    }
     console.error('POST /api/admin/locations error:', error);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
