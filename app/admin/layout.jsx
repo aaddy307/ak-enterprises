@@ -123,26 +123,41 @@ export default function AdminLayout({ children }) {
                 </Link>
               );
             })}
+            {isMobile && (
+              <button
+                onClick={() => signOut({ callbackUrl: "/admin/login" })}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-400 hover:bg-gray-800 hover:text-white w-full text-left cursor-pointer"
+              >
+                <span className="text-xl">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                </span>
+                <span className="font-medium">Sign Out</span>
+              </button>
+            )}
           </nav>
 
-          <div className="p-4 border-t border-gray-800 bg-gray-900 shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white">
-                <span className="font-semibold">{session?.user?.name?.[0] || "A"}</span>
-              </div>
-              {(sidebarOpen || isMobile) && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate text-white">{session?.user?.name || "Admin"}</p>
-                  <button
-                    onClick={() => signOut({ callbackUrl: "/admin/login" })}
-                    className="text-xs text-gray-400 hover:text-white transition-colors"
-                  >
-                    Sign Out
-                  </button>
+          {!isMobile && (
+            <div className="p-4 border-t border-gray-800 bg-gray-900 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white">
+                  <span className="font-semibold">{session?.user?.name?.[0] || "A"}</span>
                 </div>
-              )}
+                {(sidebarOpen || isMobile) && (
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate text-white">{session?.user?.name || "Admin"}</p>
+                    <button
+                      onClick={() => signOut({ callbackUrl: "/admin/login" })}
+                      className="text-xs text-gray-400 hover:text-white transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </motion.aside>
 
         <main
